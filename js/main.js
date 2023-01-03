@@ -8,7 +8,7 @@ const menuData = [
   ["gen6", "Gen 6 (#650 - #721)"],
   ["gen7", "Gen 7 (#722 - #809)"],
   ["gen8", "Gen 8 (#810 - #905)"],
-  ["gen9", "Gen 9 (#906 - #1010)"]
+  ["gen9", "Gen 9 (#906 - #1010)"],
 ];
 const sideMenuSwitches = document.querySelectorAll(".menu-btn");
 const sideMenu = document.querySelector("#sideMenu");
