@@ -3,6 +3,7 @@
   --bg-mid-blue: #4248c5;
   --white-text: #fbfafa;
   --black-text: #050a30;
+  --hover-link-color: #5cb6f9;
 }
 
 *,
@@ -31,7 +32,6 @@ nav {
 }
 
 a {
-  color: #495fef;
   text-decoration: none;
   background-color: transparent;
 }
@@ -50,4 +50,7 @@ p {
 }
 button {
   outline: none;
+  border: none;
+  background: transparent;
+  color: var(--white-text);
 }
