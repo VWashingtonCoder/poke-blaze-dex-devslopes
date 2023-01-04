@@ -54,3 +54,13 @@ button {
   background: transparent;
   color: var(--white-text);
 }
+
+.hidden {
+  display: none;
+}
+
+.menu-btn {
+  background-color: var(--bg-mid-blue);
+  border-radius: 15px;
+  padding: 20px;
+}

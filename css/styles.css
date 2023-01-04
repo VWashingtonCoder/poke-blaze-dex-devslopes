@@ -29,16 +29,13 @@
   margin-left: 1.5rem;
 }
 
-#headBar .menu-btn {
-  background-color: var(--bg-mid-blue);
-  border-radius: 15px;
-  margin-right: 2.5rem;
-  padding: 20px;
-}
-
 .menu-btn .fa-bars {
   font-size: 30px;
   pointer-events: none;
+}
+
+#headBar .menu-btn {
+  margin-right: 2.5rem;
 }
 
 #sideMenu {
@@ -70,7 +67,7 @@
   font-size: 30px;
 }
 
-.top-bar .fa-x {
+.menu-btn .fa-x {
   font-size: 24px;
 }
 
@@ -85,6 +82,32 @@
   color: var(--white-text);
 }
 
-.menu .menu-link:hover {
+.menu-link:hover {
   color: var(--hover-link-color);
+}
+
+#displayView {
+  position: absolute;
+  top: 10rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+#displayView .banner-text {
+  font-size: 50px;
+  margin: 3rem auto 5rem;
+}
+
+#displayView .home-box {
+  padding-top: 2rem;
+}
+
+.home-box .home-text {
+  font-size: 45px;
+}
+
+.home-box .menu-btn {
+  margin-top: 3rem;
+  font-size: 30px;
 }
