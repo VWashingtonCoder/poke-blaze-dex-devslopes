@@ -1,27 +1,39 @@
 /* Class Variables */
-const hide = "hide";
-/* Side Menu Variables */
-const sideMenuSwitches = document.querySelectorAll(".menu-btn");
+const hideClass = "hide";
+const openClass = "open";
+/* Element variables */
 const sideMenu = document.querySelector("#sideMenu");
-const sideMenuList = document.querySelector(".menu");
-
-// Handle menu open/close
-sideMenuSwitches.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    !sideMenu.className.includes("open")
-      ? sideMenu.classList.add("open")
-      : sideMenu.classList.remove("open");
-  });
-});
-
-// handle hide class
+const sideMenuSwitches = document.querySelectorAll(".menu-btn");
+const headMenuSwitch = document.querySelector(".menu-btn.head");
+const menuLinks = document.querySelectorAll(".menu-link");
+const homeView = document.querySelector(".home-box");
+/* Handle hide class */
 function toggleHideClass(ele) {
-  const hideClass = "hide";
-
-  !ele.classList.includes(hideClass)
+  !ele.className.includes(hideClass)
     ? ele.classList.add(hideClass)
     : ele.classList.remove(hideClass);
 }
+/* Handle open class */
+function toggleOpenClass(ele) {
+  !ele.className.includes(openClass)
+    ? ele.classList.add(openClass)
+    : ele.classList.remove(openClass);
+}
+/* Handle switch behavior */
+sideMenuSwitches.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    toggleOpenClass(sideMenu);
+  });
+});
 
-// link behavior
-const menuLinks = document.querySelectorAll("menu-links");
+/* Handle link behavior */
+menuLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    if (!homeView.className.includes(hideClass)) {
+      toggleHideClass(homeView);
+      toggleHideClass(headMenuSwitch);
+    }
+
+    toggleOpenClass(sideMenu);
+  });
+});
