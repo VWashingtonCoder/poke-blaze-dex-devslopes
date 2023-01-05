@@ -29,16 +29,13 @@
   margin-left: 1.5rem;
 }
 
-#headBar .menu-btn {
-  background-color: var(--bg-mid-blue);
-  border-radius: 15px;
-  margin-right: 2.5rem;
-  padding: 20px;
-}
-
 .menu-btn .fa-bars {
   font-size: 30px;
   pointer-events: none;
+}
+
+#headBar .menu-btn {
+  margin-right: 2.5rem;
 }
 
 #sideMenu {
@@ -70,7 +67,7 @@
   font-size: 30px;
 }
 
-.top-bar .fa-x {
+.menu-btn .fa-x {
   font-size: 24px;
 }
 
@@ -85,6 +82,90 @@
   color: var(--white-text);
 }
 
-.menu .menu-link:hover {
+.menu-link:hover {
   color: var(--hover-link-color);
+}
+
+#displayView {
+  position: absolute;
+  top: 10rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+#displayView .banner-text {
+  font-size: 50px;
+  margin: 3rem auto 5rem;
+}
+
+#displayView .home-box {
+  padding-top: 2rem;
+}
+
+.home-box .home-text {
+  font-size: 45px;
+}
+
+.home-box .menu-btn {
+  margin-top: 3rem;
+  font-size: 30px;
+}
+
+.home-box .home-marquee {
+  width: var(--marquee-width);
+  height: var(--marquee-height);
+  overflow: hidden;
+  margin: 3.5rem auto;
+  position: relative;
+}
+
+.marquee-content {
+  list-style: none;
+  display: flex;
+  height: 100%;
+  animation: scrolling var(--marquee-duration-animation) linear infinite;
+}
+
+.marquee-content .img-container {
+  max-width: var(--marquee-elm-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 100%;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.marquee-content .img-container img {
+  width: calc(var(--marquee-height) * 3 / 4);
+  margin: 0 3.5rem;
+}
+
+.home-marquee::before,
+.home-marquee::after {
+  position: abosolute;
+  height: 100%;
+  top: 0;
+  content: "";
+  z-index: 1;
+  width: 10rem;
+}
+.home-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #fff 0%, transparent 100%);
+}
+.home-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #fff 0%, transparent 100%);
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      calc(-1 * var(--marquee-elm-width) * var(--marquee-elms))
+    );
+  }
 }

@@ -4,6 +4,13 @@
   --white-text: #fbfafa;
   --black-text: #050a30;
   --hover-link-color: #5cb6f9;
+  --marquee-width: 70vw;
+  --marquee-height: 20vh;
+  --marquee-elms-displayed: 6;
+  --marquee-elm-width: calc(
+    var(--marquee-width) / var(--marquee-elms-displayed)
+  );
+  --marquee-duration-animation: calc(var(--marquee-elms) * 2s);
 }
 
 *,
@@ -53,4 +60,12 @@ button {
   border: none;
   background: transparent;
   color: var(--white-text);
+}
+.hide {
+  display: none;
+}
+.menu-btn {
+  background-color: var(--bg-mid-blue);
+  border-radius: 15px;
+  padding: 20px;
 }
