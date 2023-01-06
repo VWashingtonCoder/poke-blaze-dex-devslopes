@@ -50,9 +50,10 @@
   background: var(--bg-mid-blue);
   padding: 2rem;
   position: fixed;
-  top: 10rem;
+  top: 0;
   right: 0;
-  transform: translateX(100%);
+  left: 14rem;
+  transform: translateX(-100%);
   transition: 0.4s;
   z-index: 99;
 }
