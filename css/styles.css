@@ -94,32 +94,17 @@
 }
 
 #displayView {
-  position: absolute;
-  top: 10rem;
-  left: 0;
-  right: 0;
   text-align: center;
 }
 
-#displayView .home-box {
-  padding-top: 2rem;
-}
-
-.home-box .home-text {
-  font-size: 45px;
-}
-
-.home-box .menu-btn {
-  margin-top: 3rem;
-  font-size: 30px;
-}
-
-.home-box .home-marquee {
+#displayView .top-marquee {
   width: var(--marquee-width);
   height: var(--marquee-height);
   overflow: hidden;
-  margin: 3.5rem auto;
   position: relative;
+  margin-left: 15rem;
+  margin-bottom: 5rem;
+  margin-top: 6rem;
 }
 
 .marquee-content {
@@ -143,8 +128,8 @@
   margin: 0 3.5rem;
 }
 
-.home-marquee::before,
-.home-marquee::after {
+.top-marquee::before,
+.top-marquee::after {
   position: abosolute;
   height: 100%;
   top: 0;
@@ -152,13 +137,33 @@
   z-index: 1;
   width: 10rem;
 }
-.home-marquee::before {
+
+.top-marquee::before {
   left: 0;
   background: linear-gradient(to right, #fff 0%, transparent 100%);
 }
-.home-marquee::after {
+
+.top-marquee::after {
   right: 0;
   background: linear-gradient(to left, #fff 0%, transparent 100%);
+}
+
+#displayView .home-box {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 80vh;
+}
+
+.home-box {
+  font-size: 45px;
+  padding-top: 5rem;
+  padding-left: 6rem;
+}
+
+.home-box .menu-btn {
+  margin-top: 3rem;
+  font-size: 30px;
 }
 
 @keyframes scrolling {
@@ -171,3 +176,4 @@
     );
   }
 }
+
