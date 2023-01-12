@@ -36,7 +36,7 @@ for (let i = 0; i < marqueeLength; i++) {
 }
 
 /* searchResults */
-const searchTitle = document.querySelector('.search-title');
+
 const searchList = document.querySelector('.search-list');
 
 // API Calls
@@ -62,10 +62,15 @@ function generateDexId(id) {
   return dexId;
 }
 // searchList CreateElements
-function loadSearchTitle(param, length) {
-  const allTitle = `All Pokemon_${length} Pokemon Shown`;
+function loadSearchTitle(length, param) {
+  const searchTitle = document.querySelector('.search-title');
+  const searchNum = document.querySelector('.search-num');
+  let title = `All Pokemon`;
+  let numStr = `${length} Pokemon Shown` 
 
-  if(param === 'all') searchTitle.innerHTML = allTitle;
+
+  searchTitle.innerHTML = title;
+  searchNum.innerHTML = numStr;
 }
 function loadSearchList(id, name) {
   const listItem = document.createElement('li');
@@ -86,7 +91,7 @@ async function intitalListLoad() {
   const allPokemon = await getAllPokemon();
   const allLength = allPokemon.length;
 
-  loadSearchTitle('all', allLength);
+  loadSearchTitle(allLength, 'all');
 
   for (let i = 0; i < allLength; i++) {
     let currentPokemon = allPokemon[i];
