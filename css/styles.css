@@ -79,7 +79,6 @@
   top: 3.5rem;
   left: 0;
   right: 0;
-
   transform: translateY(-100%);
   transition: 0.4s;
   z-index: 99;
@@ -96,6 +95,29 @@
 .close-x .fa-x {
   font-size: 24px;
   pointer-events: none;
+}
+/* searchResults */
+#searchResults {
+  margin: 2rem 1rem;
+  text-align: center;
+}
+#searchResults .search-title {
+  font-size: 30px;
+}
+#searchResults .search-num {
+  font-size: 24px;
+}
+#searchResults .search-list {
+  display: flex;
+  flex-flow: column;
+  align-items: baseline;
+  width: 50vw;
+  margin: 1rem auto;
+}
+.search-item .info-link {
+  color: var(--white-text);
+  font-size: 20px;
+  text-transform: capitalize;
 }
 /*
 
