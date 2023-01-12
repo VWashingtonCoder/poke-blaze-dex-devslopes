@@ -58,6 +58,9 @@ button {
 img {
   width: 100%;
 }
+ul {
+  list-style: none;
+}
 .hide {
   display: none;
 }
