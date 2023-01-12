@@ -1,5 +1,5 @@
 const root = document.documentElement;
-/* Menu Operator */
+/* sideMenu */
 const sideMenu = document.querySelector("#sideMenu");
 const sideMenuSwitches = document.querySelectorAll(".menu-btn");
 const headMenuSwitch = document.querySelector(".menu-btn.head");
@@ -26,7 +26,20 @@ sideMenuSwitches.forEach((btn) => {
   });
 });
 
-/* API Calls */
+/* bannerMarquee */
+const marqueeContent = document.querySelector("ul.marquee-content");
+const marqueeLength = marqueeContent.children.length;
+root.style.setProperty("--marquee-elms", marqueeLength);
+
+for (let i = 0; i < marqueeLength; i++) {
+  marqueeContent.appendChild(marqueeContent.children[i].cloneNode(true));
+}
+
+/* searchResults */
+const searchTitle = document.querySelector('.search-title');
+const searchList = document.querySelector('.search-list');
+
+// API Calls
 async function getAllPokemon() {
   const url = "https://pokeapi.co/api/v2/pokemon?limit=1008&offset=0";
 
@@ -38,7 +51,7 @@ async function getAllPokemon() {
     console.log(err);
   }
 }
-// ID Handler
+// dexID Handler
 function generateDexId(id) {
   let dexId = "";
 
@@ -48,12 +61,40 @@ function generateDexId(id) {
 
   return dexId;
 }
+// searchList CreateElements
+function loadSearchTitle(param, length) {
+  const allTitle = `All Pokemon_${length} Pokemon Shown`;
 
-/* Handle marquee animation */
-const marqueeContent = document.querySelector("ul.marquee-content");
-const marqueeLength = marqueeContent.children.length;
-root.style.setProperty("--marquee-elms", marqueeLength);
-
-for (let i = 0; i < marqueeLength; i++) {
-  marqueeContent.appendChild(marqueeContent.children[i].cloneNode(true));
+  if(param === 'all') searchTitle.innerHTML = allTitle;
 }
+function loadSearchList(id, name) {
+  const listItem = document.createElement('li');
+  const infoLink = document.createElement('a');
+
+  listItem.classList.add('search-item');
+  infoLink.classList.add('info-link')
+  infoLink.setAttribute('href', '#');
+  infoLink.setAttribute('data-name', name);
+
+  infoLink.innerHTML = `${id} ${name}`;
+
+  listItem.appendChild(infoLink);
+  searchList.appendChild(listItem);
+}
+// searchList Load Handler
+async function intitalListLoad() {
+  const allPokemon = await getAllPokemon();
+  const allLength = allPokemon.length;
+
+  loadSearchTitle('all', allLength);
+
+  for (let i = 0; i < allLength; i++) {
+    let currentPokemon = allPokemon[i];
+    let dexId =  generateDexId(i + 1);
+    let name  = currentPokemon.name;
+    
+    loadSearchList(dexId, name);
+  }
+}
+
+intitalListLoad();
