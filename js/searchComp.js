@@ -114,39 +114,35 @@ function loadSearchList(id, name) {
   searchList.appendChild(listItem);
 
 }
-// searchList initial load
+// searchList load
 async function listLoad(value) {
   const pokemon = await getPokemonByRange(value);
-
   loadSearchTitle(value);
-
   for (let i = 0; i < pokemon.length; i++) {
     let currentPokemon = pokemon[i];
     let dexId =  generateDexId(i + 1);
     let name  = currentPokemon.name;
-    
     loadSearchList(dexId, name);
   }
 }
-
-listLoad('all');
 /* Menu Filters */ 
 genSelect.addEventListener('change', (e) => {
   let selectedValue = e.target.value;
   genValue = selectedValue;
-})
+});
 
 genBtn.addEventListener('click', (e) => {
   e.preventDefault();
   if (genValue === '') return;
   searchList.innerHTML = '';
   listLoad(genValue);
-})
+});
 
 reset.addEventListener('click', (e) => {
     e.preventDefault();
     searchList.innerHTML = '';
     listLoad('all');
-})
+});
 
-
+/*Inital Load*/
+listLoad('all');
