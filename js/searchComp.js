@@ -3,9 +3,8 @@ const searchTitle = document.querySelector('.search-title');
 const searchNum = document.querySelector('.search-num');
 const searchList = document.querySelector('.search-list');
 const genSelect = document.getElementById('genFilter');
-const genBtn = document.querySelector('.gen-submit');
 const reset = document.querySelector('.reset');
-/* Variables */
+/* Gen Variables */
 let genValue = '';
 const genParams = {
   all: {
@@ -66,6 +65,14 @@ const genParams = {
 }
 
 /* Api Calls */
+async function fetchPokemonTypes() {
+  
+}
+
+async function fetchPokemonAbilities() {
+  
+}
+
 async function getPokemonByRange(value) {
     const { offset, limit } = genParams[value]; 
     const rangeUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
@@ -80,6 +87,8 @@ async function getPokemonByRange(value) {
 
 }
 
+
+
 // dexID Handler
 function generateDexId(value, idx) {
   const { offset } = genParams[value];
@@ -93,7 +102,7 @@ function generateDexId(value, idx) {
   return dexId;
 }
 
-// searchList CreateElements
+// searchList Load Elements
 function loadSearchTitle(value) {
   const { limit, title } = genParams[value];
   let numStr = `${limit} Pokemon Shown`; 
@@ -129,16 +138,14 @@ async function listLoad(value) {
 }
 /* Menu Filters */ 
 genSelect.addEventListener('change', (e) => {
+  e.preventDefault();
   let selectedValue = e.target.value;
   genValue = selectedValue;
-});
-
-genBtn.addEventListener('click', (e) => {
-  e.preventDefault();
   if (genValue === '') return;
   searchList.innerHTML = '';
   listLoad(genValue);
 });
+
 
 reset.addEventListener('click', (e) => {
     e.preventDefault();

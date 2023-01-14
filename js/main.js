@@ -3,6 +3,7 @@ const root = document.documentElement;
 const sideMenu = document.querySelector("#sideMenu");
 const sideMenuSwitches = document.querySelectorAll(".menu-btn");
 const headMenuSwitch = document.querySelector(".menu-btn.head");
+const filterSelects = document.querySelectorAll(".filter-select");
 // handle hide class
 function toggleHideClass(ele) {
   const hideClass = "hide";
@@ -25,6 +26,12 @@ sideMenuSwitches.forEach((btn) => {
     toggleOpenClass(sideMenu);
   });
 });
+
+filterSelects.forEach((select) => {
+  select.addEventListener("change", () => {
+    toggleOpenClass(sideMenu);
+  }) 
+})
 
 /* bannerMarquee */
 const marqueeContent = document.querySelector("ul.marquee-content");
