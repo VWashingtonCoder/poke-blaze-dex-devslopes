@@ -103,6 +103,7 @@
 }
 #searchResults .search-title {
   font-size: 30px;
+  text-transform: capitalize;
 }
 #searchResults .search-num {
   font-size: 24px;

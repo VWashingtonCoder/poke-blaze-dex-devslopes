@@ -7,8 +7,7 @@ const genSelect = document.getElementById('genFilter');
 const typeSelect = document.getElementById('typeFilter');
 const reset = document.querySelector('.reset');
 
-/* Gen Variables */
-let genValue = '';
+/* Data Variables */
 const genParams = {
   all: {
     offset: 0, 
@@ -78,6 +77,9 @@ const genFilterData = [
   { value: 'genEightHalf', text: 'Generation 8.5 (#899-#905)'},
   { value: 'genNine', text: 'Generation 9 (#906-#1008)'}
 ]
+/* State Variables */
+let genValue = '';
+let typeValue = '';
 
 /* Api Calls */
 async function fetchPokemonTypes() {
@@ -103,7 +105,18 @@ async function getPokemonByRange(gen) {
     } catch (err) {
         console.log(err);
     }
+}
 
+async function getPokemonByType(type) {
+  const typeUrl = `https://pokeapi.co/api/v2/type/${type}`;
+
+  try {
+    let res = await fetch(typeUrl);
+    let data = await res.json();
+    return data.pokemon;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 // dexID Handler
@@ -148,23 +161,37 @@ async function loadTypeOptions() {
   }
 }
 
-function loadSearchTitle(value) {
-  const { limit, title } = genParams[value];
-  let numStr = `${limit} Pokemon Shown`; 
-  searchTitle.innerHTML = title;
+function loadSearchTitle(value, num) {
+  let titleStr = ''
+  let numStr = ''; 
+  
+  if(value.includes('gen') || value === 'all'){
+    const { limit, title } = genParams[value];
+    titleStr = title;
+    numStr = `${limit} Pokemon Shown`; 
+    
+  } else {
+    titleStr = `${value} Pokemon`
+    numStr = `${num} Pokemon Shown`;
+  }
+
+  searchTitle.innerHTML = titleStr;
   searchNum.innerHTML = numStr;
 }
 
-function loadSearchList(id, name) {
+function loadSearchList(name, id) {
   const listItem = document.createElement('li');
   const infoLink = document.createElement('a');
+  let innerText = '';
 
   listItem.classList.add('search-item');
   infoLink.classList.add('info-link')
   infoLink.setAttribute('href', '#');
   infoLink.setAttribute('data-name', name);
 
-  infoLink.innerHTML = `${id} ${name}`;
+  id ? innerText = `${id} ${name}` : innerText = name;
+
+  infoLink.innerHTML = innerText;
 
   listItem.appendChild(infoLink);
   searchList.appendChild(listItem);
@@ -172,15 +199,27 @@ function loadSearchList(id, name) {
 }
 
 // searchList load
-async function listLoad(value) {
-  const pokemon = await getPokemonByRange(value);
-  loadSearchTitle(value);
+async function listLoadGen(gen) {
+  const pokemon = await getPokemonByRange(gen);
+  loadSearchTitle(gen);
   for (let i = 0; i < pokemon.length; i++) {
     let currentPokemon = pokemon[i];
-    let dexId =  generateDexId(value, i + 1);
+    let dexId =  generateDexId(gen, i + 1);
     let name  = currentPokemon.name;
-    loadSearchList(dexId, name);
+    loadSearchList(name, dexId);
   }
+}
+
+async function listLoadType(type) {
+  const pokemonOfType = await getPokemonByType(type);
+  const totalPokemon = pokemonOfType.length;
+  loadSearchTitle(type, totalPokemon);
+  
+  pokemonOfType.forEach(pkmn => {
+    let currentPokemon = pkmn.pokemon;
+    let name = currentPokemon.name;
+    loadSearchList(name); 
+  })
 }
 
 /* Menu Filters */ 
@@ -191,19 +230,24 @@ selectGroup.forEach(select => {
 
 genSelect.addEventListener('change', (e) => {
   e.preventDefault();
-  let selectedValue = e.target.value;
-  genValue = selectedValue;
+  genValue = e.target.value;
   if (genValue === '') return;
   searchList.innerHTML = '';
-  listLoad(genValue);
+  listLoadGen(genValue);
 });
 
-
+typeSelect.addEventListener('change', (e) => {
+  e.preventDefault();
+  typeValue = e.target.value;
+  if (typeValue === '') return;
+  searchList.innerHTML = '';
+  listLoadType(typeValue);
+})
 reset.addEventListener('click', (e) => {
     e.preventDefault();
     searchList.innerHTML = '';
-    listLoad('all');
+    listLoadGen('all');
 });
 
 /*Inital Load*/
-listLoad('all');
+listLoadGen('all');
