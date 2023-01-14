@@ -2,8 +2,11 @@
 const searchTitle = document.querySelector('.search-title');
 const searchNum = document.querySelector('.search-num');
 const searchList = document.querySelector('.search-list');
+const selectGroup = document.querySelectorAll('.filter-select');
 const genSelect = document.getElementById('genFilter');
+const typeSelect = document.getElementById('typeFilter');
 const reset = document.querySelector('.reset');
+
 /* Gen Variables */
 let genValue = '';
 const genParams = {
@@ -63,18 +66,34 @@ const genParams = {
     title:'Paldea_Generation 9 (#906-#1008)'
   }
 }
+const genFilterData = [
+  { value: 'genOne', text: 'Generation 1 (#001-#151)'},
+  { value: 'genTwo', text: 'Generation 2 (#152-#251)'},
+  { value: 'genThree', text: 'Generation 3 (#252-#386)'},
+  { value: 'genFour', text: 'Generation 4 (#387-#494)'},
+  { value: 'genFive', text: 'Generation 5 (#495-#649)'},
+  { value: 'genSix', text: 'Generation 6 (#650-#721)'},
+  { value: 'genSeven', text: 'Generation 7 (#722-#809)'},
+  { value: 'genEight', text: 'Generation 8 (#810-#898)'},
+  { value: 'genEightHalf', text: 'Generation 8.5 (#899-#905)'},
+  { value: 'genNine', text: 'Generation 9 (#906-#1008)'}
+]
 
 /* Api Calls */
 async function fetchPokemonTypes() {
-  
+  const allTypesUrl = 'https://pokeapi.co/api/v2/type';
+
+  try {
+    let res = await fetch(allTypesUrl);
+    let data = await res.json();
+    return data.results;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-async function fetchPokemonAbilities() {
-  
-}
-
-async function getPokemonByRange(value) {
-    const { offset, limit } = genParams[value]; 
+async function getPokemonByRange(gen) {
+    const { offset, limit } = genParams[gen]; 
     const rangeUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   
     try {
@@ -86,8 +105,6 @@ async function getPokemonByRange(value) {
     }
 
 }
-
-
 
 // dexID Handler
 function generateDexId(value, idx) {
@@ -102,7 +119,35 @@ function generateDexId(value, idx) {
   return dexId;
 }
 
-// searchList Load Elements
+// load elements
+function loadGenOptions() {
+  genFilterData.forEach(gen => {
+    const { value, text } = gen;
+    const option = document.createElement('option');
+
+    option.classList.add('genOption');
+    option.setAttribute('value', value);
+    option.innerHTML = text;
+
+    genSelect.appendChild(option);
+  })
+}
+
+async function loadTypeOptions() {
+  const allTypes = await fetchPokemonTypes();
+
+  for(let i = 0; i < allTypes.length - 2; i++){
+    const { name } = allTypes[i];
+    const option = document.createElement('option');
+
+    option.classList.add('genOption');
+    option.setAttribute('value', name);
+    option.innerHTML = name;
+
+    typeSelect.appendChild(option);
+  }
+}
+
 function loadSearchTitle(value) {
   const { limit, title } = genParams[value];
   let numStr = `${limit} Pokemon Shown`; 
@@ -125,6 +170,7 @@ function loadSearchList(id, name) {
   searchList.appendChild(listItem);
 
 }
+
 // searchList load
 async function listLoad(value) {
   const pokemon = await getPokemonByRange(value);
@@ -136,7 +182,13 @@ async function listLoad(value) {
     loadSearchList(dexId, name);
   }
 }
+
 /* Menu Filters */ 
+selectGroup.forEach(select => {
+  if (select.className.includes('gen')) loadGenOptions();
+  else if (select.className.includes('type')) loadTypeOptions();
+})
+
 genSelect.addEventListener('change', (e) => {
   e.preventDefault();
   let selectedValue = e.target.value;
