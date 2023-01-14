@@ -81,8 +81,10 @@ async function getPokemonByRange(value) {
 }
 
 // dexID Handler
-function generateDexId(id) {
+function generateDexId(value, idx) {
+  const { offset } = genParams[value];
   let dexId = "";
+  let id = offset + idx;
 
   if (id < 10) dexId = "00" + id;
   else if (id >= 10 && id < 100) dexId = "0" + id;
@@ -120,7 +122,7 @@ async function listLoad(value) {
   loadSearchTitle(value);
   for (let i = 0; i < pokemon.length; i++) {
     let currentPokemon = pokemon[i];
-    let dexId =  generateDexId(i + 1);
+    let dexId =  generateDexId(value, i + 1);
     let name  = currentPokemon.name;
     loadSearchList(dexId, name);
   }
