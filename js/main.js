@@ -22,7 +22,8 @@ function toggleOpenClass(ele) {
 }
 // Handle menu open/close
 sideMenuSwitches.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
     toggleOpenClass(sideMenu);
   });
 });
