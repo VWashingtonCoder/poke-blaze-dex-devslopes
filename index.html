@@ -38,11 +38,24 @@
             <i class="fa-solid fa-x"></i>
           </button>
         </div>
+
+        <div class="filter-container">
+          <select name="generations" id="genFilter" class="filter-select gen">
+            <option class="genOption" value="">Filter By Generation</option>
+          </select>
+        </div>
+
+        <div class="filter-container">
+          <select name="type" id="typeFilter" class="filter-select type">
+            <option value="">Filter By Type</option>
+          </select>
+        </div>
+
+        <button class="reset menu-btn">Reset</button>
       </form>
       
       <section id="banner">
         <h2 class="banner-text">Welcome to my Pokedex built using PokeApi.</h2>
-
         <div class="top-marquee">
           <ul class="marquee-content">
             <li class="img-container">
@@ -91,6 +104,11 @@
         </div>
       </section>
 
+      <section id="searchResults">
+        <h2 class="search-title"></h2>
+        <h3 class="search-num"></h3>
+        <ul class="search-list"></ul>
+      </section>
         
 <!--            
               <option value="gen4">Gen 4 (#387 - #493)</option>
@@ -133,5 +151,6 @@
       </section> -->
     
     <script src="./js/main.js"></script>
+    <script src="./js/searchComp.js"></script>
   </body>
 </html>

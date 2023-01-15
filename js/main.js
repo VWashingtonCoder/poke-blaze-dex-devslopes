@@ -1,8 +1,9 @@
 const root = document.documentElement;
-/* Menu Operator */
+/* sideMenu */
 const sideMenu = document.querySelector("#sideMenu");
 const sideMenuSwitches = document.querySelectorAll(".menu-btn");
 const headMenuSwitch = document.querySelector(".menu-btn.head");
+const filterSelects = document.querySelectorAll(".filter-select");
 // handle hide class
 function toggleHideClass(ele) {
   const hideClass = "hide";
@@ -21,35 +22,19 @@ function toggleOpenClass(ele) {
 }
 // Handle menu open/close
 sideMenuSwitches.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
     toggleOpenClass(sideMenu);
   });
 });
 
-/* API Calls */
-async function getAllPokemon() {
-  const url = "https://pokeapi.co/api/v2/pokemon?limit=1008&offset=0";
+filterSelects.forEach((select) => {
+  select.addEventListener("change", () => {
+    toggleOpenClass(sideMenu);
+  }) 
+})
 
-  try {
-    let res = await fetch(url);
-    let data = await res.json();
-    return data.results;
-  } catch (err) {
-    console.log(err);
-  }
-}
-// ID Handler
-function generateDexId(id) {
-  let dexId = "";
-
-  if (id < 10) dexId = "00" + id;
-  else if (id >= 10 && id < 100) dexId = "0" + id;
-  else dexId = id.toString();
-
-  return dexId;
-}
-
-/* Handle marquee animation */
+/* bannerMarquee */
 const marqueeContent = document.querySelector("ul.marquee-content");
 const marqueeLength = marqueeContent.children.length;
 root.style.setProperty("--marquee-elms", marqueeLength);
