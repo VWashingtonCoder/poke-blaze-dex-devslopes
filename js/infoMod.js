@@ -1,4 +1,4 @@
-const pokemonGroup = document.querySelectorAll('.info-link');
+const pokemonGroup = document.querySelectorAll('.info-btn');
 const infoHead = document.querySelector('.info-head');
 const infoImgBox = document.querySelector('.info-img-box')
 const topInfo = document.querySelector('.top-info');
@@ -14,6 +14,21 @@ async function getPokemonByName(name) {
         console.log(err);
       }
 }
+
+function convertHeight(height) {
+    const meters = height / 10;
+    const inchesTotal = meters / 0.0254;
+    const feet = Math.floor(inchesTotal / 12);
+    const inchesLeft = Math.ceil(inchesTotal - (12 * feet));
+    return `Height: ${feet}'${inchesLeft}"`
+}
+
+function convertWeight(weight) {
+    const kilograms = weight / 10;
+    const pounds = (kilograms * 2.205).toFixed(1);
+    return `Weight: ${pounds} lbs / ${kilograms} kg`
+}
+
 
 function clearMod() {
     infoImgBox.innerHTML = '';
@@ -48,15 +63,28 @@ function createTopTypes(types) {
     topInfo.appendChild(topTypes);
 }
 
-function convertHeight(height) {
 
-    
-}
 
 function createTopInfo(height, weight) {
-    console.log(`height: ${height}, weight: ${weight}`)
+    const heightStr = convertHeight(height);
+    const weightStr = convertWeight(weight);
+    const heightInfo = document.createElement('h4');
+    const weightInfo = document.createElement('h4');
 
-    convertHeight(height);
+    heightInfo.classList.add('height-info');
+    weightInfo.classList.add('weight-info');
+    heightInfo.innerText = heightStr;
+    weightInfo.innerText = weightStr;
+
+    topInfo.appendChild(heightInfo);
+    topInfo.appendChild(weightInfo);
+
+
+    console.log(`
+        heightStr: ${heightStr},
+        weightStr: ${weightStr}
+    `);
+
 }
 
 

@@ -181,19 +181,18 @@ function loadSearchTitle(value, num) {
 
 function loadSearchList(name, id) {
   const listItem = document.createElement('li');
-  const infoLink = document.createElement('a');
+  const infoBtn = document.createElement('button');
   let innerText = '';
 
   listItem.classList.add('search-item');
-  infoLink.classList.add('info-link')
-  infoLink.setAttribute('href', '#');
-  infoLink.setAttribute('data-name', name);
+  infoBtn.classList.add('info-btn');
+  infoBtn.setAttribute('data-name', name);
 
   id ? innerText = `${id} ${name}` : innerText = name;
 
-  infoLink.innerHTML = innerText;
+  infoBtn.innerHTML = innerText;
 
-  listItem.appendChild(infoLink);
+  listItem.appendChild(infoBtn);
   searchList.appendChild(listItem);
 
 }

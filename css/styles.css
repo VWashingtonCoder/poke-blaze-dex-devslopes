@@ -132,12 +132,12 @@
   width: 85vw;
   margin: 1rem auto;
 }
-.search-item .info-link {
+.search-item .info-btn {
   font-size: 20px;
   text-transform: capitalize;
   color: var(--white-text);
 }
-.info-link:hover {
+.info-btn:hover {
   color: red;
 }
 
