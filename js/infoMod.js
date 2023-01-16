@@ -2,10 +2,12 @@ const pokemonGroup = document.querySelectorAll('.info-btn');
 const infoHead = document.querySelector('.info-head');
 const infoImgBox = document.querySelector('.info-img-box')
 const topInfo = document.querySelector('.top-info');
+const abilitiesBox = document.querySelector(".abilities-box")
+const movesList = document.querySelector(".moves-list");
+
 
 async function getPokemonByName(name) {
     const nameUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
-
     try {
         let res = await fetch(nameUrl);
         let data = await res.json();
@@ -33,6 +35,7 @@ function convertWeight(weight) {
 function clearMod() {
     infoImgBox.innerHTML = '';
     topInfo.innerHTML = '';
+    abilitiesBox.innerHTML = '';
 }
 
 function createInfoImg(imgSrc) {
@@ -79,22 +82,68 @@ function createWeightInfo(weight) {
     topInfo.appendChild(weightInfo);
 }
 
+function createAbilitiesInfo(abilities) {
+    let ability = '';
+    let abilitiesStr = 'Abilities:';
+    const abilityInfo = document.createElement('h4');
+    for(let i = 0; i < abilities.length; i++) {
+        ability = abilities[i].ability.name;
+        i !== (abilities.length - 1) 
+            ? abilitiesStr = abilitiesStr + ` ${ability} /`
+            : abilitiesStr = abilitiesStr + ` ${ability}`;
+    }
+    abilityInfo.classList.add('abilities-info');
+    abilityInfo.innerText = abilitiesStr;
+    abilitiesBox.appendChild(abilityInfo);
+}
+
+function createMovesTitle(moves) {
+    const movesTitleStr = `Moveset: ${moves.length} Moves`;
+    const movesTitle = document.createElement('h4');
+    movesTitle.classList.add('moves-title');
+    movesTitle.innerHTML = movesTitleStr;
+    movesList.appendChild(movesTitle);
+}
+
+function createMoveList(moves) {
+    let move = '';
+    let splitMoveName = [];
+    let joinMoveName = '';
+    for(let i = 0; i < moves.length; i++) {
+        const moveItem = document.createElement('li');
+        move = moves[i].move.name;
+        if(move.includes('-')) {
+            splitMoveName = move.split('-');
+            splitMoveName.forEach(piece => {
+                joinMoveName = joinMoveName + `${piece} `
+            })
+
+            move = joinMoveName;
+            joinMoveName = '';
+        } 
+        moveItem.classList.add('move-item');
+        moveItem.innerText = move;
+        movesList.appendChild(moveItem);
+    };
+}
 
 async function loadInfoMod(name, idName) {
     const pokemon = await getPokemonByName(name);
-    // abilities, height, id, moves, types, weight
     const imgSrc = pokemon.sprites.front_default;
     const types = pokemon.types;
     const height = pokemon.height;
     const weight = pokemon.weight;
+    const abilities = pokemon.abilities;
+    const moves = pokemon.moves;
 
     createInfoImg(imgSrc);
     createIdNameInfo(idName);
     createTypesInfo(types);
     createHeightInfo(height);
     createWeightInfo(weight);
-    
-    console.log("Success");
+    createAbilitiesInfo(abilities);
+    createMovesTitle(moves);
+    createMoveList(moves);
 }
 
 pokemonGroup.forEach(link => {
