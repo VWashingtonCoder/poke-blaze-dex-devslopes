@@ -42,14 +42,14 @@ function createInfoImg(imgSrc) {
     infoImgBox.appendChild(infoImg);
 }
 
-function createTopName(idName) {
+function createIdNameInfo(idName) {
     const topName = document.createElement('h3');
-    topName.classList.add('top-name');
+    topName.classList.add('id-name-info');
     topName.innerText = idName;
     topInfo.appendChild(topName);
 }
 
-function createTopTypes(types) {
+function createTypesInfo(types) {
     const topTypes = document.createElement('h4');
     let typeStr = 'Type(s):';
     for(let i = 0; i < types.length; i++) {
@@ -58,33 +58,25 @@ function createTopTypes(types) {
             ? typeStr = typeStr + ` ${typeName} /` 
             : typeStr = typeStr + ` ${typeName}` 
     }
-    topTypes.classList.add('top-types');
+    topTypes.classList.add('types-info');
     topTypes.innerText = typeStr;
     topInfo.appendChild(topTypes);
 }
 
-
-
-function createTopInfo(height, weight) {
+function createHeightInfo(height) {
     const heightStr = convertHeight(height);
-    const weightStr = convertWeight(weight);
     const heightInfo = document.createElement('h4');
-    const weightInfo = document.createElement('h4');
-
     heightInfo.classList.add('height-info');
-    weightInfo.classList.add('weight-info');
     heightInfo.innerText = heightStr;
-    weightInfo.innerText = weightStr;
-
     topInfo.appendChild(heightInfo);
+}
+
+function createWeightInfo(weight) {
+    const weightStr = convertWeight(weight);
+    const weightInfo = document.createElement('h4');
+    weightInfo.classList.add('weight-info');
+    weightInfo.innerText = weightStr;
     topInfo.appendChild(weightInfo);
-
-
-    console.log(`
-        heightStr: ${heightStr},
-        weightStr: ${weightStr}
-    `);
-
 }
 
 
@@ -97,10 +89,12 @@ async function loadInfoMod(name, idName) {
     const weight = pokemon.weight;
 
     createInfoImg(imgSrc);
-    createTopName(idName);
-    createTopTypes(types);
-
-    createTopInfo(height, weight)
+    createIdNameInfo(idName);
+    createTypesInfo(types);
+    createHeightInfo(height);
+    createWeightInfo(weight);
+    
+    console.log("Success");
 }
 
 pokemonGroup.forEach(link => {
