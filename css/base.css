@@ -70,3 +70,8 @@ ul {
   background-color: var(--bg-mid-blue);
   border-radius: 7px;
 }
+.top-bar {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 2px solid var(--black-text);
+}

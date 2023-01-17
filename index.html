@@ -32,7 +32,7 @@
       </header>
       
       <form id="sideMenu">
-        <div class="top-bar">
+        <div class="menu-bar top-bar">
           <h2>Pokedex Menu</h2>
           <button class="close-x menu-btn">
             <i class="fa-solid fa-x"></i>
@@ -111,7 +111,7 @@
       </section>
         
       <section id="infoModule">
-        <div class="top-bar">
+        <div class="info-bar top-bar">
           <h2>Pokemon Information</h2>
           <button class="close-x menu-btn">
             <i class="fa-solid fa-x"></i>
@@ -119,10 +119,19 @@
         </div>
         <div class="info-head">
           <div class="img-container info-img-box"></div>
-          <div class="top-info"></div>
+          <div class="top-info">
+            <h3 class="id-name-info">ID NAME</h3>
+            <h4 class="types-info">Type(s):</h4>
+            <h4 class="height-info">Height:</h4>
+            <h4 class="weight-info">Weight:</h4>
+          </div>
         </div>
-        <div class="abilities-box"></div>
-        <ul class="moves-list"></ul>
+        <h4 class="abilities-info">Abilities:</h4>
+        <div class="moveset">
+          <h4 class="moves-title">Moveset: (NUM OF) Moves</h4>
+          <ul class="moves-list"></ul>
+        </div>
+        
         </div>
         <button class="fav-btn">Add To Favorites</button>
       </section>
