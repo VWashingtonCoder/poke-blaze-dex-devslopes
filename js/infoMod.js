@@ -1,7 +1,11 @@
+/* variables */
 const pokemonGroup = document.querySelectorAll('.info-btn');
+const infoModule = document.querySelector('#infoModule');
+const infoX = document.querySelector('.info-x');
 const infoHead = document.querySelector('.info-head');
 const infoImgBox = document.querySelector('.info-img-box')
 const topInfo = document.querySelector('.top-info');
+const infoImg = document.querySelector('.info-img');
 const idNameInfo = document.querySelector('.id-name-info');
 const typesInfo = document.querySelector('.types-info');
 const heightInfo = document.querySelector('.height-info');
@@ -9,7 +13,7 @@ const weightInfo = document.querySelector('.weight-info');
 const abilitiesInfo = document.querySelector(".abilities-info")
 const movesTitle = document.querySelector(".moves-title");
 const movesList = document.querySelector(".moves-list");
-
+/* api function */
 async function getPokemonByName(name) {
     const nameUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
     try {
@@ -20,40 +24,8 @@ async function getPokemonByName(name) {
         console.log(err);
       }
 }
-
-function convertHeight(height) {
-    const meters = height / 10;
-    const inchesTotal = meters / 0.0254;
-    const feet = Math.floor(inchesTotal / 12);
-    const inchesLeft = Math.ceil(inchesTotal - (12 * feet));
-    return `Height: ${feet}'${inchesLeft}"`
-}
-
-function convertWeight(weight) {
-    const kilograms = weight / 10;
-    const pounds = (kilograms * 2.205).toFixed(1);
-    return `Weight: ${pounds} lbs / ${kilograms} kg`
-}
-
-
-function clearMod() {
-    infoImgBox.innerHTML = '';
-    topInfo.innerHTML = '';
-    abilitiesBox.innerHTML = '';
-}
-
-function createInfoImg(imgSrc) {
-    const infoImg = document.createElement('img');
-    infoImg.setAttribute('src', imgSrc);
-    infoImg.setAttribute('alt', 'pokemon picture');
-    infoImgBox.appendChild(infoImg);
-}
-
-function createIdNameInfo(idName) {
-    idNameInfo.innerText = idName;
-}
-
-function createTypesInfo(types) {
+/* helper functions */
+function createTypeStr(types) {
     let typeStr = 'Type(s):';
     for(let i = 0; i < types.length; i++) {
         const typeName = types[i].type.name;
@@ -61,20 +33,21 @@ function createTypesInfo(types) {
             ? typeStr = typeStr + ` ${typeName} /` 
             : typeStr = typeStr + ` ${typeName}` 
     }
-    typesInfo.innerText = typeStr;
+    return typeStr;
 }
-
-function createHeightInfo(height) {
-    const heightStr = convertHeight(height);
-    heightInfo.innerText = heightStr;
+function convertHeight(height) {
+    const meters = height / 10;
+    const inchesTotal = meters / 0.0254;
+    const feet = Math.floor(inchesTotal / 12);
+    const inchesLeft = Math.ceil(inchesTotal - (12 * feet));
+    return `Height: ${feet}'${inchesLeft}"`
 }
-
-function createWeightInfo(weight) {
-    const weightStr = convertWeight(weight);
-    weightInfo.innerText = weightStr;
+function convertWeight(weight) {
+    const kilograms = weight / 10;
+    const pounds = (kilograms * 2.205).toFixed(1);
+    return `Weight: ${pounds} lbs / ${kilograms} kg`
 }
-
-function createAbilitiesInfo(abilities) {
+function createAbilitiesStr(abilities) {
     let ability = '';
     let abilitiesStr = 'Abilities:';
     for(let i = 0; i < abilities.length; i++) {
@@ -83,14 +56,8 @@ function createAbilitiesInfo(abilities) {
             ? abilitiesStr = abilitiesStr + ` ${ability} /`
             : abilitiesStr = abilitiesStr + ` ${ability}`;
     }
-    abilitiesInfo.innerText = abilitiesStr;
+    return abilitiesStr;
 }
-
-function createMovesTitle(moves) {
-    const movesTitleStr = `Moveset: ${moves.length} Moves`;
-    movesTitle.innerHTML = movesTitleStr;
-}
-
 function createMoveList(moves) {
     let move = '';
     let splitMoveName = [];
@@ -112,37 +79,33 @@ function createMoveList(moves) {
         movesList.appendChild(moveItem);
     };
 }
-
+/* load infoModule */
 async function loadInfoMod(name, idName) {
     const pokemon = await getPokemonByName(name);
     const imgSrc = pokemon.sprites.front_default;
-    const types = pokemon.types;
-    const height = pokemon.height;
-    const weight = pokemon.weight;
-    const abilities = pokemon.abilities;
-    const moves = pokemon.moves;
+    const typeStr = createTypeStr(pokemon.types);
+    const heightStr = convertHeight(pokemon.height);
+    const weightStr = convertWeight(pokemon.weight);
+    const abilitiesStr = createAbilitiesStr(pokemon.abilities);
+    const movesTitleStr = `Moveset: ${pokemon.moves.length} Moves`;
 
-    createInfoImg(imgSrc);
-
-
-
-    createIdNameInfo(idName);
-    createTypesInfo(types);
-    createHeightInfo(height);
-    createWeightInfo(weight);
-    
-    
-    createAbilitiesInfo(abilities);
-    createMovesTitle(moves);
-    createMoveList(moves);
+    infoImg.setAttribute('src', imgSrc);
+    idNameInfo.innerText = idName;
+    typesInfo.innerText = typeStr;
+    heightInfo.innerText = heightStr;
+    weightInfo.innerText = weightStr;
+    abilitiesInfo.innerText = abilitiesStr;
+    movesTitle.innerHTML = movesTitleStr;
+    createMoveList(pokemon.moves);
 }
-
 pokemonGroup.forEach(link => {
     link.addEventListener('click', (e) => {
-        e.preventDefault();
         const pokemonName = e.target.dataset.name;
         const pokemonIdName = e.target.innerHTML;
-        clearMod();
         loadInfoMod(pokemonName, pokemonIdName);
+        toggleHideClass(infoModule);
     })
+})
+infoX.addEventListener('click', (e) => {
+    toggleHideClass(infoModule);
 })

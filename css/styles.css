@@ -149,6 +149,7 @@
 #infoModule .info-bar {
   justify-content: space-around;
   padding: 1rem 0;
+  margin-bottom: 1rem;
 }
 /*animation keyframes*/
  @keyframes scrolling {
