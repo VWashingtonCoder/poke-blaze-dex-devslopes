@@ -1,11 +1,10 @@
-/* bannerMarquee */
 root.style.setProperty("--marquee-elms", marqueeLength);
 for (let i = 0; i < marqueeLength; i++) {
   marqueeContent.appendChild(marqueeContent.children[i].cloneNode(true));
 }
-/* Handle menu open/close */ 
 sideMenuSwitches.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
     toggleOpenClass(sideMenu);
   });
 });
@@ -40,15 +39,28 @@ reset.addEventListener('click', (e) => {
 infoX.addEventListener("click", () => {
   toggleHideClass(infoModule);
 });
+favsBtn.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  const value = e.target.value;
+  if(!favorites.includes(value)) {
+    favorites.push(value);
+  }
+})
+favMenuBtn.addEventListener('click', () => {
+  const favoritesLength = favorites.length;
+  searchList.innerHTML = '';
+  loadSearchHeader('Favorite', favoritesLength)
+  favorites.sort();
+  favorites.forEach(fav => {
+    const splitFav = fav.split(' ');
+    const dexId = splitFav[0];
+    const name = splitFav[1];
 
+    loadSearchList(name, dexId);
+  })
+  setOnClick();
+})
+
+/*Initial Load*/
 listLoadGen('all');
 setOnClick();
-
-
-
-const favorites = [];
-const favsBtn = document.querySelector('.fav-btn');
-
-favsBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-})
