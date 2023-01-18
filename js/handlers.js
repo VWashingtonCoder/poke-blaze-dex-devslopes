@@ -20,7 +20,7 @@ function generateDexId(value, idx) {
   return dexId;
 }
 function createTypeStr(types) {
-  let typeStr = "Type(s):";
+  let typeStr = "Type:";
   for (let i = 0; i < types.length; i++) {
     const typeName = types[i].type.name;
     i !== types.length - 1
@@ -78,7 +78,6 @@ function setOnClick() {
     const pokemonGroup = document.querySelectorAll(".info-btn");
     pokemonGroup.forEach((link) => {
       link.addEventListener("click", (e) => {
-        console.log("clicked");
         const pokemonName = e.target.dataset.name;
         const pokemonIdName = e.target.innerHTML;
         toggleHideClass(infoModule);
@@ -173,5 +172,7 @@ async function loadInfoMod(name, idName) {
   weightInfo.innerText = weightStr;
   abilitiesInfo.innerText = abilitiesStr;
   movesTitle.innerHTML = movesTitleStr;
+  movesList.innerHTML = '';
   createMoveList(pokemon.moves);
+  favsBtn.setAttribute('value', )
 }

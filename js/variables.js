@@ -101,3 +101,4 @@ const genParams = {
   /* State Variables */
   let genValue = '';
   let typeValue = '';
+  

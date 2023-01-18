@@ -43,3 +43,12 @@ infoX.addEventListener("click", () => {
 
 listLoadGen('all');
 setOnClick();
+
+
+
+const favorites = [];
+const favsBtn = document.querySelector('.fav-btn');
+
+favsBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+})
