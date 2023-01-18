@@ -74,7 +74,7 @@
   width: 100%;
   text-align: center;
   background: var(--bg-mid-blue);
-  padding: 0.5rem;  
+  padding: 0.5rem;
   position: fixed;
   top: 3.5rem;
   left: 0;
@@ -87,10 +87,8 @@
   transition: 0.4s;
   transform: translateY(0);
 }
-#sideMenu .top-bar {
-  display: flex;
+#sideMenu .menu-bar {
   justify-content: space-between;
-  align-items: baseline;
   margin-bottom: 0.3rem;
 }
 .close-x .fa-x {
@@ -111,8 +109,6 @@
   padding: 7px 10px;
 }
 
-
-
 /* searchResults */
 #searchResults {
   margin: 2rem 1rem;
@@ -132,59 +128,61 @@
   width: 85vw;
   margin: 1rem auto;
 }
-.search-item .info-link {
+.search-item .info-btn {
   font-size: 20px;
   text-transform: capitalize;
   color: var(--white-text);
 }
-.info-link:hover {
+.info-btn:hover {
   color: red;
 }
-
-/*
-
-#sideMenu .menu {
+/* infoModule */
+#infoModule {
+  position: fixed;
+  top: 57px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-mid-blue);
+  z-index: 98;
+  text-transform: capitalize;
+}
+#infoModule .info-bar {
+  justify-content: space-around;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+#infoModule .info-head {
   display: flex;
-  flex-flow: column;
-  font-size: 28px;
-  line-height: 1.75;
-}
-
-.menu .menu-link {
-  color: var(--white-text);
-}
-
-.menu-link:hover {
-  color: var(--hover-link-color);
-}
-
-#displayView {
-  text-align: center;
-}
-
-
-
-#displayView .home-box {
-  display: flex;
-  flex-flow: column;
+  justify-content: space-evenly;
   align-items: center;
-  height: 80vh;
 }
-
-.home-box {
-  font-size: 45px;
-  padding-top: 5rem;
-  padding-left: 6rem;
+.img-container.info-img-box {
+  max-width: 150px;
 }
-
-.home-box .menu-btn {
-  margin-top: 3rem;
-  font-size: 30px;
+.top-info .id-name-info {
+  font-size: 22px;
 }
-
-
- */
- @keyframes scrolling {
+#infoModule h4, .moves-list .move-item {
+  font-size: 18px;
+}
+#infoModule .abilities-info,
+#infoModule .moveset {
+  margin-left: 7px;
+}
+.moveset .moves-list {
+  width: 10rem;
+  height: 14rem;
+  overflow: auto;
+  border: 3px solid var(--black-text);
+  margin-top: 5px;
+  padding-left: 10px;
+}
+#infoModule .fav-btn {
+  font-size: 20px;
+}
+/*animation keyframes*/
+@keyframes scrolling {
   0% {
     transform: translateX(0);
   }
