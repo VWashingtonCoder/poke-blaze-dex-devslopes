@@ -50,5 +50,9 @@ const favorites = [];
 const favsBtn = document.querySelector('.fav-btn');
 
 favsBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+  e.preventDefault(); 
+  const value = e.target.value;
+  if(!favorites.includes(value)) {
+    favorites.push(value);
+  }
 })

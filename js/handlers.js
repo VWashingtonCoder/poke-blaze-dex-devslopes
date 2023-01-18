@@ -174,5 +174,5 @@ async function loadInfoMod(name, idName) {
   movesTitle.innerHTML = movesTitleStr;
   movesList.innerHTML = '';
   createMoveList(pokemon.moves);
-  favsBtn.setAttribute('value', )
+  favsBtn.setAttribute('value', idName);
 }
