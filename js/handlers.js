@@ -98,7 +98,7 @@ function loadGenOptions() {
   });
 }
 
-function loadSearchTitle(value, num) {
+function loadSearchHeader(value, num) {
   let titleStr = "";
   let numStr = "";
   if (value.includes("gen") || value === "all") {
@@ -139,7 +139,7 @@ async function loadTypeOptions() {
 }
 async function listLoadGen(gen) {
   const pokemon = await getPokemonByRange(gen);
-  loadSearchTitle(gen);
+  loadSearchHeader(gen);
   for (let i = 0; i < pokemon.length; i++) {
     let currentPokemon = pokemon[i];
     let dexId = generateDexId(gen, i + 1);
@@ -150,7 +150,7 @@ async function listLoadGen(gen) {
 async function listLoadType(type) {
   const pokemonOfType = await getPokemonByType(type);
   const totalPokemon = pokemonOfType.length;
-  loadSearchTitle(type, totalPokemon);
+  loadSearchHeader(type, totalPokemon);
   pokemonOfType.forEach((pkmn) => {
     let currentPokemon = pkmn.pokemon;
     let name = currentPokemon.name;

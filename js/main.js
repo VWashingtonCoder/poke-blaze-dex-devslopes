@@ -58,3 +58,18 @@ favsBtn.addEventListener('click', (e) => {
     favorites.push(value);
   }
 })
+
+favMenuBtn.addEventListener('click', () => {
+  const favoritesLength = favorites.length;
+  searchList.innerHTML = '';
+  loadSearchHeader('Favorite', favoritesLength)
+  favorites.sort();
+  favorites.forEach(fav => {
+    const splitFav = fav.split(' ');
+    const dexId = splitFav[0];
+    const name = splitFav[1];
+
+    loadSearchList(name, dexId);
+  })
+  setOnClick();
+})
