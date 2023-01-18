@@ -28,6 +28,9 @@ const weightInfo = document.querySelector('.weight-info');
 const abilitiesInfo = document.querySelector(".abilities-info")
 const movesTitle = document.querySelector(".moves-title");
 const movesList = document.querySelector(".moves-list");
+/*Favorites*/
+const favsBtn = document.querySelector('.fav-btn');
+const favMenuBtn = document.querySelector('.fav-menu-btn');
 /* Data Variables */
 const genParams = {
     all: {
@@ -101,4 +104,5 @@ const genParams = {
   /* State Variables */
   let genValue = '';
   let typeValue = '';
+  const favorites = [];
   
