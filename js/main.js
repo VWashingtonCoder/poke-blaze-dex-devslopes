@@ -37,7 +37,7 @@ reset.addEventListener('click', (e) => {
     setOnClick();
 });
 infoX.addEventListener("click", () => {
-  toggleHideClass(infoModule);
+  toggleOpenClass(infoModule);
 });
 favsBtn.addEventListener('click', (e) => {
   e.preventDefault(); 
@@ -55,8 +55,7 @@ favMenuBtn.addEventListener('click', () => {
     const splitFav = fav.split(' ');
     const dexId = splitFav[0];
     const name = splitFav[1];
-
-    loadSearchList(name, dexId);
+    name ? loadSearchList(name, dexId) : loadSearchList(dexId);
   })
   setOnClick();
 })

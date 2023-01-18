@@ -83,7 +83,7 @@
   transition: 0.4s;
   z-index: 99;
 }
-#sideMenu.open {
+#sideMenu.open, #infoModule.open {
   transition: 0.4s;
   transform: translateY(0);
 }
@@ -151,6 +151,8 @@
   background-color: var(--bg-mid-blue);
   z-index: 98;
   text-transform: capitalize;
+  transition: 0.4s;
+  transform: translateY(100%);
 }
 #infoModule .info-bar {
   justify-content: space-around;

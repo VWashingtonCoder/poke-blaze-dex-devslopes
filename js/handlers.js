@@ -80,7 +80,7 @@ function setOnClick() {
       link.addEventListener("click", (e) => {
         const pokemonName = e.target.dataset.name;
         const pokemonIdName = e.target.innerHTML;
-        toggleHideClass(infoModule);
+        toggleOpenClass(infoModule);
         loadInfoMod(pokemonName, pokemonIdName);
       });
     });
