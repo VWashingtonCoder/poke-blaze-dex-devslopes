@@ -5,7 +5,8 @@ for (let i = 0; i < marqueeLength; i++) {
 }
 /* Handle menu open/close */ 
 sideMenuSwitches.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
     toggleOpenClass(sideMenu);
   });
 });
@@ -48,6 +49,7 @@ setOnClick();
 
 const favorites = [];
 const favsBtn = document.querySelector('.fav-btn');
+const favMenuBtn = document.querySelector('.fav-menu-btn');
 
 favsBtn.addEventListener('click', (e) => {
   e.preventDefault(); 
