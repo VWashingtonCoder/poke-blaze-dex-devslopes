@@ -138,7 +138,7 @@
   text-transform: capitalize;
   color: var(--white-text);
 }
-.info-btn:hover {
+.info-btn:hover, .fav-btn:hover {
   color: red;
 }
 /* infoModule */
@@ -153,6 +153,9 @@
   text-transform: capitalize;
   transition: 0.4s;
   transform: translateY(100%);
+  height: 88vh;
+    overflow: auto;
+    margin: auto;
 }
 #infoModule .info-bar {
   justify-content: space-around;
@@ -161,6 +164,10 @@
 }
 .img-container.info-img-box {
   max-width: 150px;
+}
+.img-container.info-img-box img {
+  border: 3px solid black;
+    border-radius: 10px;
 }
 .top-info .id-name-info {
   font-size: 22px;
