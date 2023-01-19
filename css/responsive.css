@@ -1,0 +1,48 @@
+/*Tablet_Portrait*/
+@media (min-width: 768px) {
+  #banner {
+    margin-top: 8.5rem;
+  }  
+  #searchResults .search-list {
+    width: 33vw;
+  }
+  #infoModule {
+    top: 5.7rem;
+    width: 75vw; 
+  }
+  .info-body .info-bottom {
+    margin: auto;
+    width: 50vw;
+  }
+  .moveset .moves-list {
+    width: 19rem;
+    height: 10.5rem;
+  }
+}
+/*Laptop View_Small*/
+@media (min-width: 1024px) {
+    #sideMenu {
+        top: 4.5rem;
+    }
+}
+/*Laptop_Medium*/
+@media (min-width: 1200px) {
+    #headBar img {
+        max-width: 4vw;
+    }
+    #sideMenu {
+        top: 3.9rem;
+    }
+}
+/*Desktop*/
+@media (min-width: 1440px) {
+    #sideMenu {
+        top: 4.5rem;
+    }
+}
+/*Desktop_HD*/
+@media (min-width: 2000px) {
+    #sideMenu {
+        top: 5.5rem;
+    }
+}

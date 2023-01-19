@@ -20,6 +20,10 @@ genSelect.addEventListener('change', (e) => {
   listLoadGen(genValue);
   setOnClick();
   toggleOpenClass(sideMenu);
+
+  if(infoModule.className.includes('open')) {
+    toggleOpenClass(infoModule)
+  }
 });
 typeSelect.addEventListener('change', (e) => {
   e.preventDefault();
@@ -29,12 +33,18 @@ typeSelect.addEventListener('change', (e) => {
   listLoadType(typeValue);
   setOnClick();
   toggleOpenClass(sideMenu);
+  if(infoModule.className.includes('open')) {
+    toggleOpenClass(infoModule)
+  }
 })
 reset.addEventListener('click', (e) => {
     e.preventDefault();
     searchList.innerHTML = '';
     listLoadGen('all');
     setOnClick();
+    if(infoModule.className.includes('open')) {
+      toggleOpenClass(infoModule)
+    }
 });
 infoX.addEventListener("click", () => {
   toggleOpenClass(infoModule);
@@ -58,6 +68,9 @@ favMenuBtn.addEventListener('click', () => {
     name ? loadSearchList(name, dexId) : loadSearchList(dexId);
   })
   setOnClick();
+  if(infoModule.className.includes('open')) {
+    toggleOpenClass(infoModule)
+  }
 })
 
 /*Initial Load*/
