@@ -84,7 +84,8 @@
   transition: 0.4s;
   z-index: 99;
 }
-#sideMenu.open, #infoModule.open {
+#sideMenu.open,
+#infoModule.open {
   transition: 0.4s;
   transform: translateY(0);
 }
@@ -92,9 +93,8 @@
   justify-content: space-between;
   margin-bottom: 0.3rem;
 }
-.close-x .fa-x {
+.close-x .x-btn {
   font-size: 18px;
-  pointer-events: none;
 }
 .filter-container .filter-select {
   width: 225px;
@@ -102,12 +102,14 @@
   font-size: 18px;
   padding: 5px;
 }
-#sideMenu .menu-btns, #infoModule .info-head {
+#sideMenu .menu-btns,
+#infoModule .info-head {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-#sideMenu .reset, #sideMenu .fav-menu-btn {
+#sideMenu .reset,
+#sideMenu .fav-menu-btn {
   margin: 10px 0 16px;
   font-size: 18px;
   background-color: var(--bg-light-blue);
@@ -127,6 +129,12 @@
 #searchResults .search-num {
   font-size: 24px;
 }
+#searchResults .favs-sort {
+  margin-top: 10px;
+}
+.favs-sort .sort-btn {
+  padding: 10px;
+}
 #searchResults .search-list {
   display: flex;
   flex-flow: column;
@@ -134,12 +142,18 @@
   width: 85vw;
   margin: 1rem auto;
 }
+.search-item {
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+}
 .search-item .info-btn {
   font-size: 20px;
   text-transform: capitalize;
   color: var(--white-text);
 }
-.info-btn:hover, .fav-btn:hover {
+.info-btn:hover,
+.fav-btn:hover {
   color: red;
 }
 /* infoModule */
@@ -153,10 +167,10 @@
   z-index: 98;
   text-transform: capitalize;
   transition: 0.4s;
-  transform: translateY(100%);
+  transform: translateY(150%);
   height: 90vh;
-    overflow: auto;
-    margin: auto;
+  overflow: auto;
+  margin: auto;
 }
 #infoModule .info-bar {
   justify-content: space-around;
@@ -168,12 +182,13 @@
 }
 .img-container.info-img-box img {
   border: 3px solid black;
-    border-radius: 10px;
+  border-radius: 10px;
 }
 .top-info .id-name-info {
   font-size: 22px;
 }
-#infoModule h4, .moves-list .move-item {
+#infoModule h4,
+.moves-list .move-item {
   font-size: 18px;
 }
 #infoModule .abilities-info,
