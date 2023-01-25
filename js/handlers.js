@@ -10,6 +10,7 @@ function toggleOpenClass(ele) {
     ? ele.classList.add(openClass)
     : ele.classList.remove(openClass);
 }
+
 function generateDexId(value, idx) {
   const { offset } = genParams[value];
   let dexId = "";
@@ -19,6 +20,14 @@ function generateDexId(value, idx) {
   else dexId = id.toString();
   return dexId;
 }
+function loadFavorites() {
+  const favoritesLength = favorites.length;
+  searchList.innerHTML = "";
+  loadSearchHeader("Favorite", favoritesLength);
+  favorites.forEach((fav) => {
+    loadSearchList(fav);
+  });
+} 
 function createTypeStr(types) {
   let typeStr = "Type:";
   for (let i = 0; i < types.length; i++) {
@@ -85,78 +94,35 @@ function setOnClick() {
       });
     });
   }, 1000);
+
+  setTimeout(() => {
+    const favsBtns = document.querySelectorAll('.favs-btn');
+    favsBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        let btnInnerText = '';
+        const item = e.target.parentNode;
+        const value = e.target.value;
+        if(!favorites.includes(value)) {
+          favorites.push(value);
+          btnInnerText = "➖ Remove From Favorites"
+        } else {
+          const removeIdx = favorites.indexOf(value);
+          favorites.splice(removeIdx, 1);
+          btnInnerText = '➕ Add To Favorites'
+
+          if(searchTitle.innerText.includes("Favorite")) {
+            searchList.removeChild(item);
+          }
+        }
+        e.target.innerText = btnInnerText;
+      })
+    })
+  }, 1000);
 }
 /* Load Functions */
-function loadGenOptions() {
-  genFilterData.forEach((gen) => {
-    const { value, text } = gen;
-    const option = document.createElement("option");
-    option.classList.add("genOption");
-    option.setAttribute("value", value);
-    option.innerHTML = text;
-    genSelect.appendChild(option);
-  });
-}
 
-function loadSearchHeader(value, num) {
-  let titleStr = "";
-  let numStr = "";
-  if (value.includes("gen") || value === "all") {
-    const { limit, title } = genParams[value];
-    titleStr = title;
-    numStr = `${limit} Pokemon Shown`;
-  } else {
-    titleStr = `${value} Pokemon`;
-    numStr = `${num} Pokemon Shown`;
-  }
-  searchTitle.innerHTML = titleStr;
-  searchNum.innerHTML = numStr;
-}
 
-function loadSearchList(name, id) {
-  const listItem = document.createElement("li");
-  const infoBtn = document.createElement("button");
-  let innerText = "";
-  listItem.classList.add("search-item");
-  infoBtn.classList.add("info-btn");
-  infoBtn.setAttribute("data-name", name);
-  id ? (innerText = `${id} ${name}`) : (innerText = name);
-  infoBtn.innerHTML = innerText;
-  listItem.appendChild(infoBtn);
-  searchList.appendChild(listItem);
-}
-/* asyncs */
-async function loadTypeOptions() {
-  const allTypes = await fetchPokemonTypes();
-  for (let i = 0; i < allTypes.length - 2; i++) {
-    const { name } = allTypes[i];
-    const option = document.createElement("option");
-    option.classList.add("genOption");
-    option.setAttribute("value", name);
-    option.innerHTML = name;
-    typeSelect.appendChild(option);
-  }
-}
-async function listLoadGen(gen) {
-  const pokemon = await getPokemonByRange(gen);
-  loadSearchHeader(gen);
-  for (let i = 0; i < pokemon.length; i++) {
-    let currentPokemon = pokemon[i];
-    let dexId = generateDexId(gen, i + 1);
-    let name = currentPokemon.name;
-    loadSearchList(name, dexId);
-  }
-}
-async function listLoadType(type) {
-  const pokemonOfType = await getPokemonByType(type);
-  const totalPokemon = pokemonOfType.length;
-  loadSearchHeader(type, totalPokemon);
-  pokemonOfType.forEach((pkmn) => {
-    let currentPokemon = pkmn.pokemon;
-    let name = currentPokemon.name;
-    loadSearchList(name);
-  });
-}
 async function loadInfoMod(name, idName) {
   const pokemon = await getPokemonByName(name);
   const imgSrc = pokemon.sprites.front_default;
@@ -176,3 +142,4 @@ async function loadInfoMod(name, idName) {
   createMoveList(pokemon.moves);
   favsBtn.setAttribute('value', idName);
 }
+
