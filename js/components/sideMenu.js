@@ -154,8 +154,6 @@ reset.addEventListener("click", (e) => {
   }
 });
 
-console.log(favsSortBtns)
-
 function sortFavorites(value) {
     if(value === "alpha") {
         favorites.sort();    
@@ -168,7 +166,6 @@ function sortFavorites(value) {
 }
 
 favsSortBtns.forEach((btn) => {
-    console.log(btn)
     btn.addEventListener('click', (e) => {
        sortFavorites(e.target.value);
     })
