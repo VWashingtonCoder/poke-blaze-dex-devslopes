@@ -1,33 +1,17 @@
-function toggleHideClass(ele) {
-  const hideClass = "hide";
-  !ele.className.includes(hideClass)
-    ? ele.classList.add(hideClass)
-    : ele.classList.remove(hideClass);
-}
-function toggleOpenClass(ele) {
-  const openClass = "open";
-  !ele.className.includes(openClass)
-    ? ele.classList.add(openClass)
-    : ele.classList.remove(openClass);
-}
-
-function generateDexId(value, idx) {
-  const { offset } = genParams[value];
-  let dexId = "";
-  let id = offset + idx;
-  if (id < 10) dexId = "00" + id;
-  else if (id >= 10 && id < 100) dexId = "0" + id;
-  else dexId = id.toString();
-  return dexId;
-}
-function loadFavorites() {
-  const favoritesLength = favorites.length;
-  searchList.innerHTML = "";
-  loadSearchHeader("Favorite", favoritesLength);
-  favorites.forEach((fav) => {
-    loadSearchList(fav);
-  });
-} 
+const infoModule = document.querySelector("#infoModule");
+const infoX = document.querySelector(".info-x");
+const infoHead = document.querySelector(".info-head");
+const infoImgBox = document.querySelector(".info-img-box");
+const topInfo = document.querySelector(".top-info");
+const infoImg = document.querySelector(".info-img");
+const idNameInfo = document.querySelector(".id-name-info");
+const typesInfo = document.querySelector(".types-info");
+const heightInfo = document.querySelector(".height-info");
+const weightInfo = document.querySelector(".weight-info");
+const abilitiesInfo = document.querySelector(".abilities-info");
+const movesTitle = document.querySelector(".moves-title");
+const movesList = document.querySelector(".moves-list");
+/* Handlers */
 function createTypeStr(types) {
   let typeStr = "Type:";
   for (let i = 0; i < types.length; i++) {
@@ -82,47 +66,8 @@ function createMoveList(moves) {
     movesList.appendChild(moveItem);
   }
 }
-function setOnClick() {
-  setTimeout(() => {
-    const pokemonGroup = document.querySelectorAll(".info-btn");
-    pokemonGroup.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        const pokemonName = e.target.dataset.name;
-        const pokemonIdName = e.target.innerHTML;
-        toggleOpenClass(infoModule);
-        loadInfoMod(pokemonName, pokemonIdName);
-      });
-    });
-  }, 1000);
 
-  setTimeout(() => {
-    const favsBtns = document.querySelectorAll('.favs-btn');
-    favsBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        let btnInnerText = '';
-        const item = e.target.parentNode;
-        const value = e.target.value;
-        if(!favorites.includes(value)) {
-          favorites.push(value);
-          btnInnerText = "➖ Remove From Favorites"
-        } else {
-          const removeIdx = favorites.indexOf(value);
-          favorites.splice(removeIdx, 1);
-          btnInnerText = '➕ Add To Favorites'
-
-          if(searchTitle.innerText.includes("Favorite")) {
-            searchList.removeChild(item);
-          }
-        }
-        e.target.innerText = btnInnerText;
-      })
-    })
-  }, 1000);
-}
 /* Load Functions */
-
-
 async function loadInfoMod(name, idName) {
   const pokemon = await getPokemonByName(name);
   const imgSrc = pokemon.sprites.front_default;
@@ -138,8 +83,10 @@ async function loadInfoMod(name, idName) {
   weightInfo.innerText = weightStr;
   abilitiesInfo.innerText = abilitiesStr;
   movesTitle.innerHTML = movesTitleStr;
-  movesList.innerHTML = '';
+  movesList.innerHTML = "";
   createMoveList(pokemon.moves);
-  favsBtn.setAttribute('value', idName);
 }
 
+infoX.addEventListener("click", () => {
+  toggleOpenClass(infoModule);
+});

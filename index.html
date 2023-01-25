@@ -12,22 +12,19 @@
     />
     <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/styles.css" />
-    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/responsive.css" />
     <title>Poke Blaze Dex</title>
   </head>
   <body>
     <main id="siteWrapper">
       <header id="headBar">
-          <img
-            src="./assets/images/Blaze-ball-transparent.png"
-            alt="site logo"
-          />
+        <img src="./assets/images/Blaze-ball-transparent.png" alt="site logo" />
         <h1 class="site-title">Poke Blaze Dex</h1>
         <button class="head-menu menu-btn menu-control">
           <div>Menu</div>
         </button>
       </header>
-      
+
       <form id="sideMenu">
         <div class="menu-bar top-bar">
           <h2>Pokedex Menu</h2>
@@ -50,7 +47,7 @@
           <button class="reset menu-btn menu-control">Reset</button>
         </div>
       </form>
-      
+
       <section id="banner">
         <h2 class="banner-text">Welcome to my Pokedex built using PokeApi.</h2>
         <div class="top-marquee">
@@ -105,12 +102,16 @@
         <h2 class="search-title"></h2>
         <h3 class="search-num"></h3>
         <div class="favs-sort hide">
-          <button class="sort-btn menu-btn alpha" value="alpha">Sort A To Z</button>
-          <button class="sort-btn menu-btn reverse" value="reverse">Sort Z To A</button>
+          <button class="sort-btn menu-btn alpha" value="alpha">
+            Sort A To Z
+          </button>
+          <button class="sort-btn menu-btn reverse" value="reverse">
+            Sort Z To A
+          </button>
         </div>
         <ul class="search-list"></ul>
       </section>
-        
+
       <section id="infoModule">
         <div class="info-bar top-bar">
           <h2>Pokemon Information</h2>
@@ -121,7 +122,7 @@
         <div class="info-body">
           <div class="info-head">
             <div class="img-container info-img-box">
-              <img src="" alt="pokemon default sprite" class="info-img">
+              <img src="" alt="pokemon default sprite" class="info-img" />
             </div>
             <div class="top-info">
               <h3 class="id-name-info">ID NAME</h3>
@@ -138,18 +139,13 @@
             </div>
           </div>
         </div>
-        
       </section>
     </main>
-    
-    <script src="./js/components/dataState.js"></script>
-    <script src="./js/apiCalls.js"></script>
-    <script src="./js/handlers.js"></script>
-    <script src="./js/components/sideMenu.js"></script>
 
-    <script src="./js/variables.js"></script>
-    
-    
+    <script src="./js/dataState.js"></script>
+    <script src="./js/apiCalls.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/sideMenu.js"></script>
+    <script src="./js/infoModule.js"></script>
   </body>
 </html>

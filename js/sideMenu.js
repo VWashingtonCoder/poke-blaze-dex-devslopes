@@ -10,6 +10,65 @@ const favsSortBtns = document.querySelectorAll(".sort-btn")
 const searchTitle = document.querySelector('.search-title');
 const searchNum = document.querySelector('.search-num');
 const searchList = document.querySelector('.search-list');
+/* handlers */
+function generateDexId(value, idx) {
+    const { offset } = genParams[value];
+    let dexId = "";
+    let id = offset + idx;
+    if (id < 10) dexId = "00" + id;
+    else if (id >= 10 && id < 100) dexId = "0" + id;
+    else dexId = id.toString();
+    return dexId;
+  }
+
+  function loadFavorites() {
+    const favoritesLength = favorites.length;
+    searchList.innerHTML = "";
+    loadSearchHeader("Favorite", favoritesLength);
+    favorites.forEach((fav) => {
+      loadSearchList(fav);
+    });
+  }
+
+  function setOnClick() {
+    setTimeout(() => {
+      const pokemonGroup = document.querySelectorAll(".info-btn");
+      pokemonGroup.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const pokemonName = e.target.dataset.name;
+          const pokemonIdName = e.target.innerHTML;
+          toggleOpenClass(infoModule);
+          loadInfoMod(pokemonName, pokemonIdName);
+        });
+      });
+    }, 1000);
+  
+    setTimeout(() => {
+      const favsBtns = document.querySelectorAll('.favs-btn');
+      favsBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault(); 
+          let btnInnerText = '';
+          const item = e.target.parentNode;
+          const value = e.target.value;
+          if(!favorites.includes(value)) {
+            favorites.push(value);
+            btnInnerText = "➖ Remove From Favorites"
+          } else {
+            const removeIdx = favorites.indexOf(value);
+            favorites.splice(removeIdx, 1);
+            btnInnerText = '➕ Add To Favorites'
+  
+            if(searchTitle.innerText.includes("Favorite")) {
+              searchList.removeChild(item);
+              searchNum.innerHTML = `${favorites.length} Pokemon Shown`
+            }
+          }
+          e.target.innerText = btnInnerText;
+        })
+      })
+    }, 1000);
+  } 
 /* Load Selects */
 function loadGenOptions() {
   genFilterData.forEach((gen) => {
@@ -21,6 +80,7 @@ function loadGenOptions() {
     genSelect.appendChild(option);
   });
 }
+
 async function loadTypeOptions() {
   const allTypes = await fetchPokemonTypes();
   for (let i = 0; i < allTypes.length - 2; i++) {
@@ -170,6 +230,7 @@ favsSortBtns.forEach((btn) => {
        sortFavorites(e.target.value);
     })
 })
+
 /*Initial Load*/
 listLoadGen('all');
 setOnClick();
